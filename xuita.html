@@ -1,0 +1,92 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<style>
+  <head>
+	  .hog {
+	  	background: #beceda; 
+	  }
+	  .hog:hover {
+	  	background: green; 
+	  }
+  </style>
+
+    <meta charset="utf-8" />
+    <title>React Tutorial</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.6.2/remarkable.min.js"></script>
+    <script src="../_js/jquery-1.7.2.min.js"></script>
+    <script>
+                                </script>
+      <script type="text/babel">
+      </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+				     $.ajax({
+		    type: "POST",
+		    dataType: 'jsonp',
+		    url: "https://api.novaposhta.ua/v2.0/json/",
+		data: {
+			      "modelName": "Address",
+		      "calledMethod": "getCities",
+		      "methodProperties": {}, 
+		      "apiKey": "6f94a6391cb5134ee68ddb7924de2a3d"
+		    
+		},
+			    success: function(msg) { 
+				    var listOfCity = msg.data.map(function(data){
+					    return data.DescriptionRu;
+				    });
+				    var handleClick = function() {
+					    console.log("i clicked");
+				    }
+var ItemCity = React.createClass({
+	render() { return (<div className="hog" onClick={this.props.onClick}> {this.props.name} </div>) }
+});
+var Zavod = React.createClass({
+	retu(data) {
+		console.log(data.target.innerText);
+	},
+	render() {
+        var target_Comparator = this.props.msg.toLowerCase("jew");
+		var dropListCity = listOfCity.filter(function(data) {
+			var name_City = data.toLowerCase();
+		       return (name_City.indexOf(target_Comparator) !== -1 && name_City.indexOf(target_Comparator) == 0);	
+		}); 
+		var dropListCity = dropListCity.map(function(data, index) {
+			return <ItemCity  name={data} onClick={this.retu} key={index} />
+		}, this)
+        if(target_Comparator.length==0){dropListCity = "novaposhta"; console.log("i empty")};
+		return (<list> {dropListCity }</list>);
+	}
+});
+	    var InputExample = React.createClass({
+		    getInitialState() {
+			    return (
+				    { name: '' }
+				   );
+		    },
+		handleChange(event) {
+			this.setState({ name: event.target.value })
+		},
+		    render() {
+			    return (<div>
+				    <input type="text"
+				    value = {this.state.name}
+				    onChange={this.handleChange} />
+				    <Zavod msg={this.state.name} onClick={this.retu}/>
+				    </div> 
+				   );
+		    }
+	    });
+ReactDOM.render(<InputExample />,
+		document.getElementById('root')); }});
+    </script>
+  </body>
+</html>
