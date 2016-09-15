@@ -41,7 +41,7 @@
                 console.log("tora done")
             },
             render() {
-            return( <div> <Children onClick={tora()}/></div>);
+            return( <div onClick={this.tora}> <Children /></div>);
             }
         })
 ReactDOM.render(<Parent />, document.getElementById('root'))
