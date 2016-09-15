@@ -28,17 +28,24 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
+            function tora() {
+                console.log("tora done")
+            }
         var Children = React.createClass({
             render() {
-                <div> I child </div>
+               return( <div> I child </div>)
             }
         })
         var Parent = React.createClass({
+             tora() {
+                console.log("tora done")
+            },
             render() {
-                <div> <Children /></div>
+            return( <div> <Children onClick={tora()}/></div>);
             }
         })
-ReactDOM.render(<Parent />, getElementById('root'))
+ReactDOM.render(<Parent />, document.getElementById('root'))
+tora();
     </script>
   </body>
 </html>
