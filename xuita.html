@@ -28,65 +28,69 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
-				     $.ajax({
-		    type: "POST",
-		    dataType: 'jsonp',
-		    url: "https://api.novaposhta.ua/v2.0/json/",
-		data: {
-			      "modelName": "Address",
-		      "calledMethod": "getCities",
-		      "methodProperties": {}, 
-		      "apiKey": "6f94a6391cb5134ee68ddb7924de2a3d"
-		    
-		},
-			    success: function(msg) { 
-				    var listOfCity = msg.data.map(function(data){
-					    return data.DescriptionRu;
-				    });
-				    var handleClick = function() {
-					    console.log("i clicked");
-				    }
-var ItemCity = React.createClass({
-	render() { return (<div className="hog" onClick={this.props.onClick}> {this.props.name} </div>) }
+        var Filters = React.createClass({
+            handleFilterChange: function() {
+                    var value = this.refs.filterInput.getDOMNode().value;
+                        this.props.updateFilter(value);
+                          
+            },
+            render: function() {
+                    return <input type="text" ref="filterInput" onChange={this.handleFilterChange} placeholder="Filter" />;
+                      
+            }
+
+        });
+
+var List = React.createClass({
+    getInitialState: function() {
+        return {
+                  listItems: ['Chicago', 'New York', 'Tokyo', 'London', 'San Francisco', 'Amsterdam', 'Hong Kong'],
+          nameFilter: ''
+        
+        };
+          
+    },
+    handleFilterUpdate: function(filterValue) {
+        this.setState({
+                  nameFilter: filterValue
+                
+        });
+          
+    },
+    render: function() {
+        var displayedItems = this.state.listItems.filter(function(item) {
+                  var match = item.toLowerCase().indexOf(this.state.nameFilter.toLowerCase());
+                        return (match !== -1);
+                            
+        }.bind(this));
+
+            var content;
+            if (displayedItems.length > 0) {
+                var items = displayedItems.map(function(item) {
+                            return <li>{item}</li>;
+                                  
+                });
+                      content = <ul>{items}</ul>
+                              
+            } else {
+                      content = <p>No items matching this filter</p>;
+                          
+            }
+
+            return (
+                          <div>
+                                  <Filters updateFilter={this.handleFilterUpdate} />
+                                          <h4>Results</h4>
+                                                  {content}
+                                                        </div>
+                                                            
+                   );
+              
+    }
+
 });
-var Zavod = React.createClass({
-	retu(data) {
-		console.log(data.target.innerText);
-	},
-	render() {
-        var target_Comparator = this.props.msg.toLowerCase("jew");
-		var dropListCity = listOfCity.filter(function(data) {
-			var name_City = data.toLowerCase();
-		       return (name_City.indexOf(target_Comparator) !== -1 && name_City.indexOf(target_Comparator) == 0);	
-		}); 
-		var dropListCity = dropListCity.map(function(data, index) {
-			return <ItemCity  name={data} onClick={this.retu} key={index} />
-		}, this)
-        if(target_Comparator.length==0){dropListCity = "novaposhta"; console.log("i empty")};
-		return (<list> {dropListCity }</list>);
-	}
-});
-	    var InputExample = React.createClass({
-		    getInitialState() {
-			    return (
-				    { name: '' }
-				   );
-		    },
-		handleChange(event) {
-			this.setState({ name: event.target.value })
-		},
-		    render() {
-			    return (<div>
-				    <input type="text"
-				    value = {this.state.name}
-				    onChange={this.handleChange} />
-				    <Zavod msg={this.state.name} onClick={this.retu}/>
-				    </div> 
-				   );
-		    }
-	    });
-ReactDOM.render(<InputExample />,
-		document.getElementById('root')); }});
+
+React.renderComponent(<List />, document.body);
     </script>
   </body>
 </html>
