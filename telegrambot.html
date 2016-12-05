@@ -1,0 +1,93 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+	  <head>
+		  <div>
+			  <ul>
+				  <!DOCTYPE html>
+				  <html lang="en">
+				  <head>
+				  	<meta charset="UTF-8">
+				  	<title></title>
+				  </head>
+				  <body>
+					  <div>
+
+					  </div>
+				  </body>
+				  </html>
+			  </ul>
+		  </div>
+		      <meta charset="utf-8" />
+		      <title>React Tutorial</title>
+	              <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react.js"></script>
+	              <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom.js"></script>
+		      <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+		      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		      <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.6.2/remarkable.min.js"></script>
+		      <script src="../_js/jquery-1.7.2.min.js"></script>
+          </head>
+	   <body>
+		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+
+		   <form>
+			     <input type="text" id="search" >
+		     </form>
+		     <div id="content"></div>
+		     <div id="city"></div>
+		     <script>
+			     function testAjax(){	
+				     var result = "";
+				     $.ajax({
+		    type: "POST",
+		    dataType: 'jsonp',
+		    url: "https://api.novaposhta.ua/v2.0/json/",
+		data: {
+			      "modelName": "Address",
+		      "calledMethod": "getCities",
+		      "methodProperties": {}, 
+		      "apiKey": "6f94a6391cb5134ee68ddb7924de2a3d"
+		    
+		},
+			    success: function(msg) { result = msg }});
+				     return  result;
+			     }
+var kor = testAjax();
+console.log(kor);
+/* var search = document.querySelector('#search');
+
+			     function iReceived(msg) {
+				       var mass = msg.data;
+				       var filtred_mass = mass.filter(function(e) {
+					      var city = e.DescriptionRu.toLowerCase(); 
+					      var point = document.querySelector('#search').value.toLowerCase();
+					      return city.indexOf(point) !== -1;
+				       });
+				       filtred_mass.map(function(e) {
+					      var dmi = document.querySelector('#content'); 
+					      var li = document.createElement('li');
+					      li.innerHTML = e.DescriptionRu;
+					      dmi.appendChild(li);
+				       })
+
+			     };
+
+function Foo(e) {
+	$.ajax({
+		    type: "POST",
+		    dataType: 'jsonp',
+		    url: "https://api.novaposhta.ua/v2.0/json/",
+		data: {
+			      "modelName": "Address",
+		      "calledMethod": "getCities",
+		      "methodProperties": {}, 
+		      "apiKey": "6f94a6391cb5134ee68ddb7924de2a3d"
+		    
+		},
+		success: iReceived	});
+
+};
+
+search.oninput = Foo; */
+		     </script>
+

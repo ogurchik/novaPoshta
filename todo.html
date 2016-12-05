@@ -1,0 +1,48 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>React Tutorial</title>
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+                                </script>
+      <script type="text/babel">
+      </script>
+  </head>
+  <body>
+      <form>
+          <input type="text" id="search" onchange="Foo()">
+      </form>
+    <div id="content"></div>
+    <div id="city"></div>
+    <script>
+            var search = document.querySelector('#search');
+              function iReceived(msg) {
+                  var mass = msg.data;
+                  mass.map(function(e) { var city = document.querySelector('#city');
+                          var newLi = document.createElement('li');
+                          newLi.innerHTML=e.Description;
+                          city.appendChild(newLi);
+                  })
+              };
+function Foo( e ) {
+                     $.ajax({
+                       type: "POST",
+                       dataType:'jsonp',
+                       url: "https://api.novaposhta.ua/v2.0/json/",
+                       data: {"modelName": "Address",
+                            "calledMethod": "getCities",
+                            "methodProperties":{}, 
+                             "apiKey": "6f94a6391cb5134ee68ddb7924de2a3d"},
+                    success:   iReceived , 
+
+                });
+                     console.log(e.target.value);
+};
+search.oninput = Foo;
+    </script>
+  </body>
+    </html>
+

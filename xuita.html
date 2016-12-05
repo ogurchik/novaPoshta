@@ -2,16 +2,7 @@
 
 <!DOCTYPE html>
 <html>
-<style>
   <head>
-	  .hog {
-	  	background: #beceda; 
-	  }
-	  .hog:hover {
-	  	background: green; 
-	  }
-  </style>
-
     <meta charset="utf-8" />
     <title>React Tutorial</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react.js"></script>
@@ -28,24 +19,71 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
-            function tora() {
-                console.log("tora done")
-            }
-        var Children = React.createClass({
-            render() {
-               return( <div> I child </div>)
-            }
-        })
-        var Parent = React.createClass({
-             tora() {
-                console.log("tora done")
-            },
-            render() {
-            return( <div onClick={this.tora}> <Children /></div>);
-            }
-        })
-ReactDOM.render(<Parent />, document.getElementById('root'))
-tora();
+				     $.ajax({
+		    type: "POST",
+		    dataType: 'jsonp',
+		    url: "https://api.novaposhta.ua/v2.0/json/",
+		data: {
+			      "modelName": "Address",
+		      "calledMethod": "getCities",
+		      "methodProperties": {}, 
+		      "apiKey": "6f94a6391cb5134ee68ddb7924de2a3d"
+		    
+		},
+			    success: function(msg) { 
+				    var listOfCity = msg.data.map(function(data){
+					    return data.DescriptionRu;
+				    });
+var ItemCity = React.createClass({
+	render() { return (<div> {this.props.name} </div>) }
+});
+var Zavod = React.createClass({
+	render() {
+        var target_Comparator = this.props.msg.toLowerCase("jew");
+		var dropListCity = listOfCity.filter(function(data) {
+			var name_City = data.toLowerCase();
+		       return (name_City.indexOf(target_Comparator) !== -1 && name_City.indexOf(target_Comparator) == 0);	
+		}); 
+		var dropListCity = dropListCity.map(function(data, index) {
+			return <ItemCity name={data} key={index} />
+		})
+        if(target_Comparator.length==0){dropListCity = "novaposhta"; console.log("i empty")};
+		return (<list> {dropListCity}</list>);
+	}
+});
+	    var InputExample = React.createClass({
+		    getInitialState() {
+			    return (
+				    { name: '', city:'' }
+				   );
+		    },
+		handleChange(event) {
+			this.setState({ name: event.target.value });
+		var dropListCity = listOfCity.filter(function(data) {
+			var name_City = data.toLowerCase();
+			var target_Comparator = event.target.value.toLowerCase();
+		       return (name_City.indexOf(target_Comparator) !== -1 && name_City.indexOf(target_Comparator) == 0);	
+		}); 
+		var dropListCity = dropListCity.map(function(data, index) {
+			return <ItemCity name={data} key={index} />
+		});
+		this.setState({city: dropListCity})
+		},
+		chooseCity(data) {
+			this.setState({name: data.target.innerText, city: ''})
+		},
+		    render() {
+			    return (<div>
+				    <input type="text"
+				    value = {this.state.name}
+				    onChange={this.handleChange} />
+				    <div onClick={this.chooseCity}> {this.state.city} </div> 
+				    </div> 
+				   );
+		    }
+	    });
+ReactDOM.render(<InputExample />,
+		document.getElementById('root')); }});
     </script>
   </body>
 </html>

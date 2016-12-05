@@ -1,0 +1,107 @@
+
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+	  <head>
+		  <div>
+			  <ul>
+				  <!DOCTYPE html>
+				  <html lang="en">
+				  <head>
+				  	<meta charset="UTF-8">
+				  	<title></title>
+				  </head>
+				  <body>
+					  <div>
+
+					  </div>
+				  </body>
+				  </html>
+			  </ul>
+		  </div>
+		      <meta charset="utf-8" />
+		      <title>React Tutorial</title>
+	              <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react.js"></script>
+	              <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom.js"></script>
+		      <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+		      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		      <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.6.2/remarkable.min.js"></script>
+		      <script src="../_js/jquery-1.7.2.min.js"></script>
+          </head>
+	   <body>
+		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+
+		   <form>
+			     <input type="text" id="search" >
+		     </form>
+		     <div id="content"></div>
+		     <div id="city"></div>
+		     <script type="text/babel">
+			     function iReceived(msg) {
+				       var mass = msg.data;
+				       var filtred_mass = mass.filter(function(e) {
+					      var city = e.DescriptionRu.toLowerCase(); 
+					      var point = document.querySelector('#search').value.toLowerCase();
+					      return city.indexOf(point) !== -1;
+				       });
+				       filtred_mass.map(function(e) {
+					      var dmi = document.querySelector('#content'); 
+					      var li = document.createElement('li');
+					      li.innerHTML = e.DescriptionRu;
+					      dmi.appendChild(li);
+				       })
+
+			     };
+function iReceived(msg) {
+    return 34;
+}
+function Gogogo(){	$.ajax({
+		    type: "POST",
+		    dataType: 'jsonp',
+		    url: "https://api.novaposhta.ua/v2.0/json/",
+		data: {
+			      "modelName": "Address",
+		      "calledMethod": "getCities",
+		      "methodProperties": {}, 
+		      "apiKey": "6f94a6391cb5134ee68ddb7924de2a3d"
+		    
+		},
+		success: iReceived	});
+}
+function Buba() { return new Promise(function(resolve, reject) {
+    resolve(43);
+});
+}
+var tores = Buba().then(function(){ return "giga" })
+                 var App = React.createClass({
+                     getInitialState:  function() {
+                         return (
+                             {name: ''}
+                             );
+                     },
+                                       handleChange(event) {
+                                           this.setState({name: event.target.value });
+                                           var rota = this.state;
+                                       },
+                     render: function() {
+                         return (<div><input  value={this.state.name} onChange={this.handleChange}/> 
+                             <Write messeg={this.state.name}/> </div>);
+                     }
+                 });
+var Write = React.createClass({
+    getInitialState: function() {
+        return {city: this.props.messeg}
+    },
+    shouldComponentUpdate: function() {
+        if(this.state.city != this.props.messeg) {return true}
+        console.log(this.props.messeg);
+        return false;
+    },
+    render: function() {
+        var liba = this.props.messeg;
+        return (<div> {liba} </div>);
+    }
+});
+                ReactDOM.render(<App />, document.getElementById('content'));
+		     </script>
+
