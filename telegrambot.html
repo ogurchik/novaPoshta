@@ -17,7 +17,7 @@
       </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="zoom"></div>
     <script type="text/babel">
         var par = new Promise(function(resolve,reject) {
              $.ajax({
@@ -36,7 +36,31 @@
                 }
             });
         })
-par.then(function(result){ var dudu = result.data; console.log(dudu) }, function(err) { console.log('flaf you, but no result') });
+par.then(function(result){
+	var dudu = result.data; 
+       },
+	       
+	
+function(err) { console.log('flaf you, but no result') });
+    </script>
+    <script type="text/babel">
+	    function tick() {
+		    const element = (
+				        <div>
+					      <h1>Hello, world!</h1>
+					            <h2>It is {new Date().toLocaleTimeString()}.</h2>
+						        </div>
+							  
+				    );
+		    ReactDOM.render(
+				        element,
+					    document.getElementById('zoom')
+					      
+				   );
+
+	    }
+
+setInterval(tick, 1000);
     </script>
   </body>
 </html>
