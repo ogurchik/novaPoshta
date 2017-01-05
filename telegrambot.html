@@ -43,23 +43,39 @@ function Kirkorov(props) {
            )
 }
 
-       function Clock(props) {
-           return(
-               <div>
-                  <h1> Clock clock </h1>
-                  <h3> It is {props.date.toLocaleTimeString()}.</h3>
-                  <Kirkorov name="ZLO"/>
-               </div>
-               );
-       }       
-       function Tick() {
+class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {date: new Date()};
+    }
+    componentDidMount(){
+        this.timerID = setInterval(
+                () => this.tick(),
+                1000
+                );
+
+    }
+    componentWillUnmount() {
+         clearInterval(this.timerID);
+    }
+    tick() {
+        this.setState({
+            date: new Date()
+        });
+    }
+    render() {
+        return (
+                <div>
+                   <h3> He he </h3>
+                   <h4> It is {this.state.date.toLocaleTimeString()}.</h4>
+                </div>
+               )
+    }
+}
            ReactDOM.render(
-               <Clock date={new Date()} />,
+               <Clock  />,
                document.getElementById('zoom')
                );
-       }
-Tick();
-	
     </script>
   </body>
 </html>
