@@ -36,46 +36,35 @@
                 }
             });
         });
-const nunia = <div> KOROBA </div>;
-function Kirkorov(props) {
-    return (
-            <h2> Kirkorov kalambur kk {props.name}</h2>
-           )
-}
-
-class Clock extends React.Component {
+var CITY;
+class Form extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {date: new Date()};
+        this.state = {value:''};
+        this.handleChange = this.handleChange.bind(this);
+    par.then(function(nameCity){
+        CITY = nameCity.data;
+    })
     }
-    componentDidMount(){
-        this.timerID = setInterval(
-                () => this.tick(),
-                1000
-                );
-
-    }
-    componentWillUnmount() {
-         clearInterval(this.timerID);
-    }
-    tick() {
-        this.setState({
-            date: new Date()
-        });
+    handleChange(event) {
+        this.setState({value: event.target.value});
+        console.log(CITY);
     }
     render() {
         return (
-                <div>
-                   <h3> He he </h3>
-                   <h4> It is {this.state.date.toLocaleTimeString()}.</h4>
-                </div>
-               )
+            <div>
+            <form >
+            <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                <input type="submit" />
+            </form>
+            </div>
+            )
     }
-}
-           ReactDOM.render(
-               <Clock  />,
-               document.getElementById('zoom')
-               );
+} 
+ReactDOM.render(
+    <Form />,
+    document.getElementById('zoom')
+    )
     </script>
   </body>
 </html>
