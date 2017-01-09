@@ -70,8 +70,12 @@ var Kura = React.createClass({
 		      )
 	},
     handleChange(event) {
-        this.setState({value: event.target.value});
+        console.log(event.target.value)
+        this.setState({valu: event.target.value});
 	var enteredNameCity = event.target.value;
+    if(event.target.value.length<1) {
+        enteredNameCity = 0;
+    }
 	var varitifyCity = CITY.filter(function(dta) {
 	      	return (dta.indexOf(enteredNameCity) !== -1 && dta.indexOf(enteredNameCity) == 0);
 	}
@@ -80,8 +84,7 @@ var Kura = React.createClass({
 			return <Item name={data} />
 		})
 	this.setState({kek: ListTown})
-	
-    },
+},
 	chooseCity: function(data) {
 		this.setState({kek:'', valu:data.target.innerText})
 		console.log('gogog')
