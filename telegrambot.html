@@ -36,35 +36,73 @@
                 }
             });
         });
+var ItemCity = React.createClass({
+	render() { return(<div> {this.props.name} </div>) }
+})
+var Item = React.createClass({
+	render: function() {
+		return <li> I mad {this.props.name} </li>;
+	}
+})
+var arry = ['kolon', 'petrol', 'turel'];
+var ContactsList = React.createClass({
+	render: function() {
+		return (
+				<div>
+				{
+					arry.map(function(el){
+						return <Item name={el} />
+					})
+				}
+				</div>
+		       )
+	}
+})
 var CITY;
-class Form extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {value:''};
-        this.handleChange = this.handleChange.bind(this);
     par.then(function(nameCity){
-        CITY = nameCity.data;
-    })
-    }
+	    var CITY = nameCity.data.map(function(doIt) {
+		    return doIt.DescriptionRu.toLowerCase()
+	    })
+var Kura = React.createClass({
+	getInitialState: function() {
+		return( 
+				{kek: '', valu: ''}
+		      )
+	},
     handleChange(event) {
         this.setState({value: event.target.value});
-        console.log(CITY);
-    }
-    render() {
-        return (
+	var enteredNameCity = event.target.value;
+	var varitifyCity = CITY.filter(function(dta) {
+	      	return (dta.indexOf(enteredNameCity) !== -1 && dta.indexOf(enteredNameCity) == 0);
+	}
+			)
+		var ListTown = varitifyCity.map(function(data){
+			return <Item name={data} />
+		})
+	this.setState({kek: ListTown})
+	
+    },
+	chooseCity: function(data) {
+		this.setState({kek:'', valu:data.target.innerText})
+		console.log('gogog')
+	},
+	render: function() {
+		return(
+
             <div>
             <form >
-            <input type="text" value={this.state.value} onChange={this.handleChange}/>
-                <input type="submit" />
+	    <input type="text" value={this.state.valu} onChange={this.handleChange}/>
+	    <div onClick={this.chooseCity}> {this.state.kek} </div>
             </form>
             </div>
-            )
-    }
-} 
+		      ) 
+	}
+})
 ReactDOM.render(
-    <Form />,
+    <Kura />,
     document.getElementById('zoom')
     )
+    })
     </script>
   </body>
 </html>
